@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavArgs
+import androidx.navigation.fragment.navArgs
 import com.android.gw2market.R
 import com.android.gw2market.databinding.FragmentInfoBinding
 import com.android.volley.Request
@@ -29,11 +31,13 @@ class InfoFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val queue = Volley.newRequestQueue(requireContext())
-        // url needs to be reworked.
-        val url = "http://api.gw2tp.com/1/items?ids=123,345&fields=name,sell"
+        val itemIDArg : InfoFragmentArgs by navArgs()
+        val itemID = itemIDArg.itemId
+        val url = "http://api.gw2tp.com/1/items?ids=${itemID}&fields=name,sell"
+
         val stringRequest = StringRequest(Request.Method.GET, url,
             Response.Listener<String> {  resp ->
-               iBinding.TXTVItemInfo.text = "response is: $resp"
+               iBinding.TXTVItemInfo.text = "$resp"
             }, Response.ErrorListener { iBinding.TXTVItemInfo.text = "Something wrong!"})
         queue.add(stringRequest)
     }

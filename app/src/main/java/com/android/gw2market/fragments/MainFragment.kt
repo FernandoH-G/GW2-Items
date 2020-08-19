@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.android.gw2market.R
 import com.android.gw2market.databinding.FragmentMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
     private var tmpBinding: FragmentMainBinding? = null
@@ -25,7 +26,15 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         mBinding.BTNSearch.setOnClickListener {
-            val toInfo = MainFragmentDirections.actionMainFragmentToInfoFragment()
+            if (isInputNull) {
+                val msg = "Please input item ID # or full item name."
+                val snackbar = Snackbar.make(mBinding.BTNSearch, msg,
+                    Snackbar.LENGTH_SHORT)
+                snackbar.show()
+                return@setOnClickListener
+            }
+            val itemID = mBinding.TXTIItemId.text.toString()
+            val toInfo = MainFragmentDirections.actionMainFragmentToInfoFragment(itemID)
             Navigation.findNavController(mBinding.root).navigate(toInfo)
         }
     }
@@ -34,4 +43,7 @@ class MainFragment : Fragment() {
         tmpBinding = null
         super.onDestroyView()
     }
+
+    private val isInputNull: Boolean
+        get() = mBinding.TXTIItemId.text.toString().isEmpty()
 }

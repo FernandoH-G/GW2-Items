@@ -18,5 +18,9 @@
         android:id="@+id/infoFragment"
         android:name="com.android.gw2market.fragments.InfoFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info" />
+        tools:layout="@layout/fragment_info" >
+        <argument
+            android:name="item_id"
+            app:argType="string" />
+    </fragment>
 </navigation>
