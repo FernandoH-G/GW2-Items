@@ -5,4 +5,7 @@
     <string name="item">Item ID or Name</string>
     <string name="search">Search</string>
     <string name="app_logo">App Logo</string>
+    <string name="item_price">Item price loading...</string>
+    <string name="item_icon">Item icon</string>
+    <string name="selling_price">Selling Price:</string>
 </resources>
