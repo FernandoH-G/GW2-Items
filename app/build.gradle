@@ -53,6 +53,9 @@ dependencies {
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
+    // GSON
+    implementation 'com.google.code.gson:gson:2.8.5'
+
 
     // Default stuff
     implementation fileTree(dir: "libs", include: ["*.jar"])

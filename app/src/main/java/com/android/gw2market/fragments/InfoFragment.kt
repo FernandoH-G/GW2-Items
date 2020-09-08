@@ -1,6 +1,5 @@
 package com.android.gw2market.fragments
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,8 +13,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
-import java.io.InputStream
-import java.net.URL
+import org.json.JSONArray
 
 class InfoFragment : Fragment() {
     private var tmpBinding: FragmentInfoBinding? = null
@@ -40,16 +38,15 @@ class InfoFragment : Fragment() {
 
         val jsonRequest = JsonObjectRequest(Request.Method.GET,url, null,
         Response.Listener { resp ->
-            val obj = resp.getJSONArray("results")
-//            Log.d("item is null?: ", obj.isNull(0).toString())
-            if (obj.isNull(0)) return@Listener
+            val respObj = resp.getJSONArray("results")
+            if (respObj.isNull(0)) return@Listener
             // Figure out an elegant way to deal with the item not being in the DB.
-            val itemName = obj.getJSONArray(0).get(1).toString()
-            val itemPrice = obj.getJSONArray(0).get(2).toString()
-            val itemImgUrl = obj.getJSONArray(0).get(3).toString()
-            Picasso.with(requireContext()).load(itemImgUrl).into(iBinding.IMGVItemIcon)
-            iBinding.TXTVItemInfo.text = itemName
-            iBinding.TXTVItemPrice.text = itemPrice
+            // url for copper/silver/gold currency icon.
+            // https://www.gw2tp.com/static/img/copper.png
+            iBinding.TXTVItemInfo.text = parseItemInfo(respObj,1)
+            iBinding.TXTVItemPrice.text = parseItemInfo(respObj,2)
+            Log.d("price char count: ", parseItemInfo(respObj,2).count().toString())
+            Picasso.with(requireContext()).load(parseItemInfo(respObj,3)).into(iBinding.IMGVItemIcon)
         }, Response.ErrorListener { iBinding.TXTVItemInfo.text = "Something wrong with json" })
 
         queue.add(jsonRequest)
@@ -58,5 +55,10 @@ class InfoFragment : Fragment() {
     override fun onDestroyView() {
         tmpBinding = null
         super.onDestroyView()
+    }
+
+    // 1: item name, 2: selling price, 3: img url.
+    private fun parseItemInfo(obj : JSONArray, infoIndex : Int) : String {
+        return obj.getJSONArray(0).get(infoIndex).toString()
     }
 }
