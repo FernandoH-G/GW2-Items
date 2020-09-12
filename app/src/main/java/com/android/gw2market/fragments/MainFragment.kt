@@ -30,21 +30,6 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        mBinding.BTNSearch.setOnClickListener {
-            if (isInputNull) {
-                val msg = "Please input item ID # or full item name."
-                val snackbar = Snackbar.make(
-                    mBinding.BTNSearch, msg,
-                    Snackbar.LENGTH_SHORT
-                )
-                snackbar.show()
-                return@setOnClickListener
-            }
-            val itemID = mBinding.TXTIItemId.text.toString()
-            val toInfo = MainFragmentDirections.actionMainFragmentToInfoFragment(itemID)
-            Navigation.findNavController(mBinding.root).navigate(toInfo)
-        }
-
         // Save json from json file as a map.
         val jsonFileString: String = getJSONDataFromAsset(requireContext(), "gw2_equipment.json")
         val gson = Gson()
@@ -64,8 +49,25 @@ class MainFragment : Fragment() {
         equipment.forEach{
             eMap[it.name] = it.id
         }
-        Log.i("Fernando", eMap["Sealed Package of Snowballs"].toString())
+//        Log.i("Fernando", eMap["Sealed Package of Snowballs"].toString())
 
+        mBinding.BTNSearch.setOnClickListener {
+            if (isInputNull) {
+                val msg = "Please input item ID # or full item name."
+                val snackbar = Snackbar.make(
+                    mBinding.BTNSearch, msg,
+                    Snackbar.LENGTH_SHORT
+                )
+                snackbar.show()
+                return@setOnClickListener
+            }
+            val itemIDorName = mBinding.TXTIItemId.text.toString()
+            // Use map to figure out whether string id is in map.
+            val itemID = eMap[itemIDorName].toString()
+            //
+            val toInfo = MainFragmentDirections.actionMainFragmentToInfoFragment(itemID)
+            Navigation.findNavController(mBinding.root).navigate(toInfo)
+        }
     }
 
     override fun onDestroyView() {
