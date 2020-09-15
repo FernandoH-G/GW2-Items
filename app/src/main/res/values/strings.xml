@@ -2,10 +2,11 @@
     <string name="app_name">GW2 Market</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="item">Item ID or Name</string>
+    <string name="item">Full Equipment Name</string>
     <string name="search">Search</string>
     <string name="app_logo">App Logo</string>
     <string name="item_price">Item price loading...</string>
     <string name="item_icon">Item icon</string>
     <string name="selling_price">Selling Price:</string>
+    <string name="new_search">New Search</string>
 </resources>

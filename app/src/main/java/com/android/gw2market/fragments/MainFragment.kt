@@ -7,18 +7,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.navigation.Navigation
 import com.android.gw2market.databinding.FragmentMainBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
+import java.util.*
 
 data class Equipment(val name: String, val id: Int)
 
 class MainFragment : Fragment() {
     private var tmpBinding: FragmentMainBinding? = null
     private val mBinding get() = tmpBinding!!
+    private val eMap = mutableMapOf<String,Int>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loadEquipmentMap()
+        Log.i("Fernando", "onCreate: loaded Equipment Map.")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,30 +39,10 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // Save json from json file as a map.
-        val jsonFileString: String = getJSONDataFromAsset(requireContext(), "gw2_equipment.json")
-        val gson = Gson()
-//        val mapType= object : TypeToken<Map<String,Any>>() {}.type
-//        var equipment: Map<String,Any> = gson.fromJson(jsonFileString, mapType)
-//        equipment.forEachIndexed { idx, equip->  Log.i("data",">Item $idx:\n$equip")}
-//        equipment.forEach{Log.d("Hello", it.toString())}
-//        Log.i("Main", equipment.toString())
-//        equipment.forEach{
-//                Log.i("Fernando",it.value.toString())
-//        }
-
-        // Need type for gson.fromJson()
-        val listEquipmentType = object : TypeToken<List<Equipment>>() {}.type
-        val equipment: List<Equipment> = gson.fromJson(jsonFileString,listEquipmentType)
-        val eMap = mutableMapOf<String,Int>()
-        equipment.forEach{
-            eMap[it.name] = it.id
-        }
-//        Log.i("Fernando", eMap["Sealed Package of Snowballs"].toString())
 
         mBinding.BTNSearch.setOnClickListener {
             if (isInputNull) {
-                val msg = "Please input item ID # or full item name."
+                val msg = "Please input full item name."
                 val snackbar = Snackbar.make(
                     mBinding.BTNSearch, msg,
                     Snackbar.LENGTH_SHORT
@@ -61,12 +50,22 @@ class MainFragment : Fragment() {
                 snackbar.show()
                 return@setOnClickListener
             }
-            val itemIDorName = mBinding.TXTIItemId.text.toString()
+            val itemName = mBinding.TXTIItemId.text.toString()
             // Use map to figure out whether string id is in map.
-            val itemID = eMap[itemIDorName].toString()
-            //
-            val toInfo = MainFragmentDirections.actionMainFragmentToInfoFragment(itemID)
-            Navigation.findNavController(mBinding.root).navigate(toInfo)
+            val itemID = eMap[itemName.toUpperCase(Locale.ROOT)].toString()
+            if (itemID.contentEquals("null")) {
+                val msg = "Please check for misspellings."
+                val snackbar = Snackbar.make(
+                    mBinding.BTNSearch,msg,
+                    Snackbar.LENGTH_SHORT
+                )
+                snackbar.show()
+                return@setOnClickListener
+            } else {
+                mBinding.TXTIItemId.text?.clear()
+                val toInfo = MainFragmentDirections.actionMainFragmentToInfoFragment(itemID)
+                Navigation.findNavController(mBinding.root).navigate(toInfo)
+            }
         }
     }
 
@@ -87,5 +86,19 @@ class MainFragment : Fragment() {
             return "Error in getJSONDataFromAsset.\n"
         }
         return jsonString
+    }
+
+    private fun loadEquipmentMap() {
+        // Save json from json file as a map.
+        val filename = "gw2_equipment_uppercase.json"
+        val jsonFileString: String = getJSONDataFromAsset(requireContext(),filename)
+        val gson = Gson()
+
+        val listEquipmentType = object : TypeToken<List<Equipment>>() {}.type
+        val equipment: List<Equipment> = gson.fromJson(jsonFileString,listEquipmentType)
+        equipment.forEach{
+            eMap[it.name] = it.id
+//        Log.i("Fernando", eMap["Sealed Package of Snowballs"].toString())
+        }
     }
 }
