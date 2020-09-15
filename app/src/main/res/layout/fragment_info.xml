@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.InfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TextView
         android:id="@+id/TXTV_item_info"
         android:layout_width="159dp"
@@ -32,21 +30,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TXTV_item_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toEndOf="@+id/TXTV_selling_price"
-        app:layout_constraintTop_toBottomOf="@+id/TXTV_item_info" />
-
-    <TextView
         android:id="@+id/TXTV_selling_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/selling_price"
-        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price"
         app:layout_constraintStart_toStartOf="@+id/TXTV_item_info"
         app:layout_constraintTop_toBottomOf="@+id/TXTV_item_info" />
 
@@ -61,5 +49,59 @@
         app:layout_constraintStart_toStartOf="parent">
 
     </com.google.android.material.button.MaterialButton>
+
+    <ImageView
+        android:id="@+id/IMGV_copper_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:src="@drawable/copper"
+        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_copper"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/TXTV_item_price_copper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="160dp"
+        app:layout_constraintStart_toEndOf="@+id/IMGV_copper_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TXTV_item_price_gold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintStart_toEndOf="@+id/IMGV_gold_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/IMGV_gold_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:src="@drawable/gold"
+        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_gold"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/IMGV_silver_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:src="@drawable/silver"
+        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_silver"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/TXTV_item_price_silver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="136dp"
+        app:layout_constraintStart_toEndOf="@+id/IMGV_silver_icon"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

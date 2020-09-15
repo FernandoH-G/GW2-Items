@@ -52,8 +52,7 @@ class InfoFragment : Fragment() {
             // https://www.gw2tp.com/static/img/copper.png
             iBinding.TXTVItemInfo.text = parseItemInfo(respObj,1)
             val selPrice = parseItemInfo(respObj,2)
-            setGW2Currency("10002309")
-            iBinding.TXTVItemPrice.text = ""
+            setGW2Currency(selPrice)
 //            Log.d("price char count: ", parseItemInfo(respObj,2).count().toString())
             Picasso.with(requireContext()).load(parseItemInfo(respObj,3)).into(iBinding.IMGVItemIcon)
         }, Response.ErrorListener { iBinding.TXTVItemInfo.text = "Something wrong with json" })
@@ -73,13 +72,39 @@ class InfoFragment : Fragment() {
 
     private fun setGW2Currency(num: String) {
         val numLen = num.length
-        if (numLen > 4) {
-            val gold = num.subSequence(0, numLen-4)
-            val silver = num.subSequence(numLen-4,numLen-2)
-            val copper = num.subSequence(numLen-2,numLen)
-            Log.i("Fernando","$gold $silver $copper")
-        } else if (numLen > 3){
-
+        Log.i("Fernando", numLen.toString())
+        var gold : String = "0"
+        var silver : String = "0"
+        var copper : String = "0"
+        when {
+            numLen > 4 -> {
+                gold = num.subSequence(0, numLen-4).toString()
+                silver = num.subSequence(numLen-4,numLen-2).toString()
+                copper = num.subSequence(numLen-2,numLen).toString()
+            }
+            numLen > 3 -> {
+                gold = "0"
+                silver = num.subSequence(0, numLen-2).toString()
+                copper = num.subSequence(numLen-2, numLen).toString()
+            }
+            numLen > 2 -> {
+                gold = "0"
+                silver = num[0].toString()
+                copper = num.subSequence(numLen-2,numLen).toString()
+            }
+            numLen > 1 -> {
+                gold = "0"
+                silver = "0"
+                copper = num.subSequence(numLen-2,numLen).toString()
+            }
+            numLen > 0 -> {
+                gold = "0"
+                silver = "0"
+                copper = num[0].toString()
+            }
         }
+        iBinding.TXTVItemPriceGold.text = gold
+        iBinding.TXTVItemPriceSilver.text = silver
+        iBinding.TXTVItemPriceCopper.text = copper
     }
 }
