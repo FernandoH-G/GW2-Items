@@ -9,39 +9,39 @@
 
     <ImageView
         android:id="@+id/IMGV_app_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="119dp"
-        android:src="@drawable/gw2_market_logo"
+        android:layout_width="296dp"
+        android:layout_height="126dp"
+        android:layout_marginTop="110dp"
+        android:contentDescription="@string/app_logo"
+        android:src="@drawable/gw2_long_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/app_logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/search_box_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="230dp"
         android:layout_height="68dp"
-        android:layout_marginTop="106dp"
+        android:layout_marginTop="342dp"
         android:hint="@string/item"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/IMGV_app_logo"
-        app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:boxCornerRadiusTopStart="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/IMGV_app_logo"
+        app:layout_constraintStart_toStartOf="@+id/IMGV_app_logo"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TXTI_item_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:imeOptions="actionDone"/>
+            android:imeOptions="actionDone"
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/BTN_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,4 +50,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_box_layout" />
+
+    <ImageView
+        android:id="@+id/IMGV_market_text"
+        android:layout_width="230dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="206dp"
+        android:src="@drawable/gw2_market"
+        app:layout_constraintEnd_toEndOf="@+id/IMGV_app_logo"
+        app:layout_constraintStart_toStartOf="@+id/IMGV_app_logo"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
