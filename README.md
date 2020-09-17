@@ -5,7 +5,7 @@ The queries are case insensitive.
 # Screenshots
 
 ## Home  
-<img src="repo-images/gw2_market_home.png" width="50%"/>  
+<img src="repo-images/gw2_main_edit.png" width="50%"/>  
 <br>  
 
 ## Search  
@@ -13,7 +13,7 @@ The queries are case insensitive.
 <br>  
 
 ## Search Result  
-<img src="repo-images/gw2_market_search_result.png" width="50%"/>  
+<img src="repo-images/gw2_market_result.png" width="50%"/>  
 
 # Future plans
 * Improve visual appeal.
