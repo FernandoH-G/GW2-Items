@@ -9,23 +9,26 @@
 
     <TextView
         android:id="@+id/TXTV_item_info"
-        android:layout_width="159dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="306dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/hello_blank_fragment"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/IMGV_item_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="Item info loading..." />
 
     <ImageView
         android:id="@+id/IMGV_item_icon"
-        android:layout_width="92dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="62dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
         android:contentDescription="@string/item_icon"
         android:src="@android:drawable/ic_dialog_alert"
+        app:layout_constraintEnd_toStartOf="@+id/TXTV_item_info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,10 +36,38 @@
         android:id="@+id/TXTV_selling_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:text="@string/selling_price"
-        app:layout_constraintStart_toStartOf="@+id/TXTV_item_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TXTV_item_info" />
+
+    <ImageView
+        android:id="@+id/IMGV_gold_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="198dp"
+        android:src="@drawable/gold"
+        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_gold"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/IMGV_copper_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="198dp"
+        android:src="@drawable/copper"
+        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_copper"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/IMGV_silver_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="198dp"
+        android:src="@drawable/silver"
+        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_silver"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/BTN_new_search"
@@ -50,21 +81,21 @@
 
     </com.google.android.material.button.MaterialButton>
 
-    <ImageView
-        android:id="@+id/IMGV_copper_icon"
+    <TextView
+        android:id="@+id/TXTV_item_price_silver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
-        android:src="@drawable/copper"
-        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_copper"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="156dp"
+        app:layout_constraintStart_toEndOf="@+id/IMGV_silver_icon"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TXTV_item_price_copper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="180dp"
         app:layout_constraintStart_toEndOf="@+id/IMGV_copper_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,36 +103,9 @@
         android:id="@+id/TXTV_item_price_gold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="132dp"
         app:layout_constraintStart_toEndOf="@+id/IMGV_gold_icon"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/IMGV_gold_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
-        android:src="@drawable/gold"
-        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_gold"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/IMGV_silver_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
-        android:src="@drawable/silver"
-        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_silver"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/TXTV_item_price_silver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="136dp"
-        app:layout_constraintStart_toEndOf="@+id/IMGV_silver_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
