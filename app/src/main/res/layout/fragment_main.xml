@@ -8,14 +8,24 @@
     tools:context=".fragments.MainFragment">
 
     <ImageView
-        android:id="@+id/IMGV_app_logo"
+        android:id="@+id/IMGV_gw2_official_text"
         android:layout_width="296dp"
         android:layout_height="126dp"
         android:layout_marginTop="110dp"
         android:contentDescription="@string/app_logo"
-        android:src="@drawable/gw2_long_name"
+        android:src="@drawable/txt_gw2_official_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/IMGV_item_text"
+        android:layout_width="218dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/txt_gw2_items"
+        app:layout_constraintEnd_toEndOf="@+id/IMGV_gw2_official_text"
+        app:layout_constraintStart_toStartOf="@+id/IMGV_gw2_official_text"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -29,8 +39,8 @@
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/IMGV_app_logo"
-        app:layout_constraintStart_toStartOf="@+id/IMGV_app_logo"
+        app:layout_constraintEnd_toEndOf="@+id/IMGV_gw2_official_text"
+        app:layout_constraintStart_toStartOf="@+id/IMGV_gw2_official_text"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -51,13 +61,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_box_layout" />
 
-    <ImageView
-        android:id="@+id/IMGV_market_text"
-        android:layout_width="230dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="206dp"
-        android:src="@drawable/gw2_market"
-        app:layout_constraintEnd_toEndOf="@+id/IMGV_app_logo"
-        app:layout_constraintStart_toStartOf="@+id/IMGV_app_logo"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
