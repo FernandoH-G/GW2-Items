@@ -16,13 +16,12 @@
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/IMGV_item_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Item info loading..." />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/IMGV_item_icon"
-        android:layout_width="62dp"
-        android:layout_height="58dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="8dp"
