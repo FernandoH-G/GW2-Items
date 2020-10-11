@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">GW2 Items</string>
-    <string name="hello_blank_fragment">Retrieving name...</string>
+    <string name="retrieving_name">Retrieving name...</string>
     <string name="item">Full Item Name</string>
     <string name="search">Search</string>
     <string name="app_logo">App Logo</string>
@@ -8,4 +8,16 @@
     <string name="item_icon">Item icon</string>
     <string name="selling_price">Selling Price:</string>
     <string name="new_search">New Search</string>
+    <string name="about_gw2_items_header"><u>About GW2 Items</u></string>
+    <string name="about_gw2_items_text">GW2 Items is intended to facilitate fast and easy item
+        look up for Guild Wars 2. One use case would be to look at the items rarity, description,
+        and other such information. Another use case would be to look up the current trading post
+        selling price.</string>
+    <string name="credits_header"><u> Credits</u></string>
+    <string name="credits_text1">Armor icon made by <a href="https://www.flaticon.com/authors/nikita-golubev" title="Nikita Golubev">Nikita Golubev</a></string>
+    <string name="credits_text2">Magnifying glass made by Unknown</string>
+    <string name="credits_text3">GW2 trading post api used: gw2tp.com</string>
+    <string name="about_app_link">About App</string>
+    <string name="contact_header"><u>Contact</u></string>
+    <string name="contact_text">github.com/FernandoH-G</string>
 </resources>

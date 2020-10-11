@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_infoFragment"
             app:destination="@id/infoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/infoFragment"
@@ -23,4 +26,9 @@
             android:name="item_id"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.android.gw2market.fragments.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

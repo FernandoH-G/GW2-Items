@@ -67,6 +67,10 @@ class MainFragment : Fragment() {
                 Navigation.findNavController(mBinding.root).navigate(toInfo)
             }
         }
+        mBinding.TXTVAboutLink.setOnClickListener {
+            val toAbout = MainFragmentDirections.actionMainFragmentToAboutFragment()
+            Navigation.findNavController(mBinding.root).navigate(toAbout)
+        }
     }
 
     override fun onDestroyView() {
@@ -98,7 +102,6 @@ class MainFragment : Fragment() {
         val equipment: List<Equipment> = gson.fromJson(jsonFileString,listEquipmentType)
         equipment.forEach{
             eMap[it.name] = it.id
-//        Log.i("Fernando", eMap["Sealed Package of Snowballs"].toString())
         }
     }
 }
