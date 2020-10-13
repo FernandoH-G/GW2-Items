@@ -5,4 +5,8 @@
     <color name="colorPrimaryDark">#008000</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="white_text">#ffffff</color>
+    <color name="shrine_pink_dark">#783475</color>
+    <color name="colorPrimaryVariant">#5f9661</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
 </resources>

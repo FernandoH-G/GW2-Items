@@ -6,7 +6,7 @@
     <string name="app_logo">App Logo</string>
     <string name="item_price">Item price loading...</string>
     <string name="item_icon">Item icon</string>
-    <string name="selling_price">Selling Price:</string>
+    <string name="selling_price"><u>Selling Price</u></string>
     <string name="new_search">New Search</string>
     <string name="about_gw2_items_header"><u>About GW2 Items</u></string>
     <string name="about_gw2_items_text">GW2 Items is intended to facilitate fast and easy item
@@ -14,10 +14,22 @@
         and other such information. Another use case would be to look up the current trading post
         selling price.</string>
     <string name="credits_header"><u> Credits</u></string>
-    <string name="credits_text1">Armor icon made by <a href="https://www.flaticon.com/authors/nikita-golubev" title="Nikita Golubev">Nikita Golubev</a></string>
+    <string name="credits_text1">Armor icon made by Nikita Golubev</string>
     <string name="credits_text2">Magnifying glass made by Unknown</string>
     <string name="credits_text3">GW2 trading post api used: gw2tp.com</string>
     <string name="about_app_link">About App</string>
     <string name="contact_header"><u>Contact</u></string>
-    <string name="contact_text">github.com/FernandoH-G</string>
+    <string name="contact_text">github.com/FernandoH-G/GW2-Items</string>
+    <string name="to_home">Home</string>
+    <string name="gold_icon">gold_icon</string>
+    <string name="copper_icon">copper_icon</string>
+    <string name="silver_icon">silver_icon</string>
+    <string name="fab_back_button">FAB back button.</string>
+    <string name="level_header"><u>Level</u></string>
+    <string name="item_name"><b>Name</b></string>
+    <string name="buying_price"><u>Buying Price</u></string>
+    <string name="description">Description</string>
+    <string name="item_level">Level</string>
+    <string name="rarity_header"><u>Rarity</u></string>
+    <string name="vendor_value_header"><u>Vendor Value</u></string>
 </resources>

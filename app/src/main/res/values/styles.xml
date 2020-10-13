@@ -5,6 +5,31 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="floatingActionButtonStyle">@style/Widget.MyApp.FloatingActionButton</item>
+        <item name="materialButtonStyle">@style/Widget.MyApp.Button.</item>
     </style>
 
+<!--    Floating Action Bar Styling-->
+    <style name="Widget.MyApp.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.MyApp.FloatingActionButton</item>
+    </style>
+
+    <style name="ThemeOverlay.MyApp.FloatingActionButton" parent="">
+        <item name="colorSecondary">@color/colorPrimaryVariant</item>
+        <item name="colorOnSecondary">@color/colorWhite</item>
+    </style>
+
+<!--    Contained Button Styling-->
+    <style name="Widget.MyApp.Button." parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.MyApp.Button</item>
+    </style>
+
+    <style name="ThemeOverlay.MyApp.Button" parent="">
+        <item name="colorPrimary">@color/colorPrimaryVariant</item>
+    </style>
+
+
+<!--    Why cant I make my own colorOnPrimaryVariant?-->
+<!--    Where is the list for colorPrimary, colorSecondary, etc. -->
 </resources>

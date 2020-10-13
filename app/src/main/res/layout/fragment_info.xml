@@ -7,104 +7,315 @@
     android:layout_height="match_parent"
     tools:context=".fragments.InfoFragment">
 
-    <TextView
-        android:id="@+id/TXTV_item_info"
-        android:layout_width="306dp"
-        android:layout_height="58dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/retrieving_name"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/IMGV_item_icon"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/MCV_card1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="32dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="3dp"
+        app:contentPadding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="-30dp"
+            tools:layout_editor_absoluteY="325dp">
+
+            <!--            icon-->
+            <ImageView
+                android:id="@+id/IMGV_icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:contentDescription="@string/item_icon"
+                tools:layout_editor_absoluteX="381dp"
+                tools:layout_editor_absoluteY="325dp" />
+            <!--            name and type-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="-30dp"
+                tools:layout_editor_absoluteY="325dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/MTXTV_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    tools:layout_editor_absoluteX="-30dp"
+                    tools:layout_editor_absoluteY="325dp"
+                    tools:text="Name" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/MTXTV_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    tools:layout_editor_absoluteX="-30dp"
+                    tools:layout_editor_absoluteY="344dp"
+                    tools:text="Type" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/MCV_card2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="3dp"
+        app:contentPadding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MCV_card1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="-30dp"
+            tools:layout_editor_absoluteY="325dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_level_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/level_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/item_level"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_description"
+                android:layout_width="234dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="27dp"
+                android:text="@string/description"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/MCV_card3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="3dp"
+        app:contentPadding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MCV_card2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="-30dp"
+            tools:layout_editor_absoluteY="325dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_selling_price_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/selling_price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/IMGV_gold_selling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="11dp"
+                android:contentDescription="@string/gold_icon"
+                android:src="@drawable/gold"
+                app:layout_constraintStart_toStartOf="@+id/MTXTV_selling_price_header"
+                app:layout_constraintTop_toBottomOf="@+id/MTXTV_selling_price_header" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_selling_price_gold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
+                app:layout_constraintBottom_toBottomOf="@+id/IMGV_gold_selling"
+                app:layout_constraintStart_toEndOf="@+id/IMGV_gold_selling"
+                app:layout_constraintTop_toBottomOf="@+id/MTXTV_selling_price_header"
+                tools:text="34" />
+
+            <ImageView
+                android:id="@+id/IMGV_silver_selling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/silver_icon"
+                android:src="@drawable/silver"
+                app:layout_constraintStart_toStartOf="@+id/IMGV_gold_selling"
+                app:layout_constraintTop_toBottomOf="@+id/IMGV_gold_selling" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_selling_price_silver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="7dp"
+                app:layout_constraintBottom_toBottomOf="@+id/IMGV_silver_selling"
+                app:layout_constraintStart_toEndOf="@+id/IMGV_silver_selling"
+                app:layout_constraintTop_toBottomOf="@+id/MTXTV_selling_price_gold"
+                tools:text="34" />
+
+            <ImageView
+                android:id="@+id/IMGV_copper_selling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/copper_icon"
+                android:src="@drawable/copper"
+                app:layout_constraintStart_toStartOf="@+id/IMGV_silver_selling"
+                app:layout_constraintTop_toBottomOf="@+id/IMGV_silver_selling" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_selling_price_copper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/IMGV_copper_selling"
+                app:layout_constraintStart_toEndOf="@+id/IMGV_copper_selling"
+                app:layout_constraintTop_toBottomOf="@+id/MTXTV_selling_price_silver"
+                tools:text="34" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_buying_price_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/buying_price"
+                app:layout_constraintStart_toEndOf="@+id/MTXTV_selling_price_header"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/IMGV_gold_buying"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="11dp"
+                android:contentDescription="@string/gold_icon"
+                android:src="@drawable/gold"
+                app:layout_constraintStart_toStartOf="@+id/MTXTV_buying_price_header"
+                app:layout_constraintTop_toBottomOf="@+id/MTXTV_buying_price_header" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_buying_price_gold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/IMGV_gold_buying"
+                app:layout_constraintStart_toEndOf="@+id/IMGV_gold_buying"
+                tools:text="34" />
+
+            <ImageView
+                android:id="@+id/IMGV_silver_buying"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:contentDescription="@string/silver_icon"
+                android:src="@drawable/silver"
+                app:layout_constraintStart_toStartOf="@+id/IMGV_gold_buying"
+                app:layout_constraintTop_toBottomOf="@+id/IMGV_gold_buying" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_buying_price_silver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/IMGV_silver_buying"
+                app:layout_constraintStart_toEndOf="@+id/IMGV_silver_buying"
+                tools:text="34" />
+
+            <ImageView
+                android:id="@+id/IMGV_copper_buying"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/copper_icon"
+                android:src="@drawable/copper"
+                app:layout_constraintStart_toStartOf="@+id/IMGV_silver_buying"
+                app:layout_constraintTop_toBottomOf="@+id/IMGV_silver_buying" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_buying_price_copper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/IMGV_copper_buying"
+                app:layout_constraintStart_toEndOf="@+id/IMGV_copper_buying"
+                tools:text="34" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_rarity_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="64dp"
+                android:text="@string/rarity_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/MTXTV_rarity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                app:layout_constraintEnd_toEndOf="@+id/MTXTV_rarity_header"
+                app:layout_constraintStart_toStartOf="@+id/MTXTV_rarity_header"
+                app:layout_constraintTop_toBottomOf="@+id/MTXTV_rarity_header"
+                tools:text="rarity" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/FAB_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@string/fab_back_button"
+        android:src="@drawable/abc_vector_test"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/IMGV_item_icon"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/item_icon"
-        android:src="@android:drawable/ic_dialog_alert"
-        app:layout_constraintEnd_toStartOf="@+id/TXTV_item_info"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/TXTV_selling_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/selling_price"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TXTV_item_info" />
-
-    <ImageView
-        android:id="@+id/IMGV_gold_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="198dp"
-        android:src="@drawable/gold"
-        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_gold"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/IMGV_copper_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="198dp"
-        android:src="@drawable/copper"
-        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_copper"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/IMGV_silver_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="198dp"
-        android:src="@drawable/silver"
-        app:layout_constraintBottom_toBottomOf="@+id/TXTV_item_price_silver"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/BTN_new_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="65dp"
-        android:text="@string/new_search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </com.google.android.material.button.MaterialButton>
-
-    <TextView
-        android:id="@+id/TXTV_item_price_silver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="156dp"
-        app:layout_constraintStart_toEndOf="@+id/IMGV_silver_icon"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/TXTV_item_price_copper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="180dp"
-        app:layout_constraintStart_toEndOf="@+id/IMGV_copper_icon"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/TXTV_item_price_gold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="132dp"
-        app:layout_constraintStart_toEndOf="@+id/IMGV_gold_icon"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
