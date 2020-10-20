@@ -5,6 +5,7 @@
     android:id="@+id/infoLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2A4CAF50"
     tools:context=".fragments.InfoFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -50,6 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     tools:layout_editor_absoluteX="-30dp"
                     tools:layout_editor_absoluteY="325dp"
                     tools:text="Name" />
@@ -94,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="@string/level_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -148,6 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/selling_price"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -222,6 +226,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/buying_price"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintStart_toEndOf="@+id/MTXTV_selling_price_header"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -287,9 +292,10 @@
                 android:id="@+id/MTXTV_rarity_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="64dp"
+                android:layout_marginStart="16dp"
                 android:text="@string/rarity_header"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintStart_toEndOf="@+id/MTXTV_buying_price_header"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView

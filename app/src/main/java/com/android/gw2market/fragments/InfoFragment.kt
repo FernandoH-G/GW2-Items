@@ -14,9 +14,12 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.textview.MaterialTextView
 import com.squareup.picasso.Picasso
 import org.json.JSONArray
 import org.json.JSONObject
+
+class Price(var gold: String = "0", var silver: String = "0", var copper: String = "0")
 
 class InfoFragment : Fragment() {
     private var tmpBinding: FragmentInfoBinding? = null
@@ -54,12 +57,22 @@ class InfoFragment : Fragment() {
                 if (respObj.isNull(0)) return@Listener
                 // url for copper/silver/gold currency icon.
                 // https://www.gw2tp.com/static/img/copper.png
-                iBinding.MTXTVName.setTypeface(null,Typeface.BOLD)
+                iBinding.MTXTVName.setTypeface(null, Typeface.BOLD)
                 iBinding.MTXTVName.text = parseItemInfo(respObj, 1)
                 val selPrice = parseItemInfo(respObj, 2)
                 val buyPrice = parseItemInfo(respObj, 3)
-                setGW2Currency(selPrice, buyPrice)
-//            Log.i("price char count: ", parseItemInfo(respObj,2).count().toString())
+                val sViews = arrayOf(
+                    iBinding.MTXTVSellingPriceGold,
+                    iBinding.MTXTVSellingPriceSilver,
+                    iBinding.MTXTVSellingPriceCopper
+                )
+                val bViews = arrayOf(
+                    iBinding.MTXTVBuyingPriceGold,
+                    iBinding.MTXTVBuyingPriceSilver,
+                    iBinding.MTXTVBuyingPriceCopper
+                )
+                setGW2Price(selPrice, sViews)
+                setGW2Price(buyPrice, bViews)
                 Picasso.get().load(parseItemInfo(respObj, 4))
                     .into(iBinding.IMGVIcon)
             }, { Log.i("InfoFrag", "Error in jsonRequestTP") })
@@ -71,7 +84,6 @@ class InfoFragment : Fragment() {
                 iBinding.MTXTVLevel.text = parseItemInfo(respObj, "level")
                 iBinding.MTXTVDescription.text = parseItemInfo(respObj, "description")
                 iBinding.MTXTVRarity.text = parseItemInfo(respObj, "rarity")
-                // query vendor value for the market card!
 //                Log.i("InfoFrag", resp.getJSONObject(0).get("level").toString())
 
             }, { Log.i("InfoFrag", "Error in new json request.") })
@@ -95,58 +107,44 @@ class InfoFragment : Fragment() {
     private fun parseItemInfo(obj: JSONObject, info: String): String {
         try {
             obj.get(info)
-        } catch (e : Exception) {
+        } catch (e: Exception) {
             return "No $info"
         }
         return obj.get(info).toString()
     }
 
-    // Find more elegant way to do this.
-    // Add way to reuse this function for buy and sell price.
-    private fun setGW2Currency(sellNum: String, buyNum: String) {
-        val (sGold, sSilver, sCopper) = parseNum(sellNum)
-        iBinding.MTXTVSellingPriceGold.text = sGold
-        iBinding.MTXTVSellingPriceSilver.text = sSilver
-        iBinding.MTXTVSellingPriceCopper.text = sCopper
-        val (bGold, bSilver, bCopper) = parseNum(buyNum)
-        iBinding.MTXTVBuyingPriceGold.text = bGold
-        iBinding.MTXTVBuyingPriceSilver.text = bSilver
-        iBinding.MTXTVBuyingPriceCopper.text = bCopper
+    private fun setGW2Price(num: String, views: Array<MaterialTextView>) {
+        val price: Price = parseNum(num)
+        views[0].text = price.gold
+        views[1].text = price.silver
+        views[2].text = price.copper
     }
 
-    private fun parseNum(num: String): Triple<String, String, String> {
+    private fun parseNum(num: String): Price {
         val numLen = num.length
         Log.i("infoFrag", "Num length: $numLen")
-        var gold = "0"
-        var silver = "0"
-        var copper = "0"
+        val price = Price()
         when {
             numLen > 4 -> {
-                gold = num.subSequence(0, numLen - 4).toString()
-                silver = num.subSequence(numLen - 4, numLen - 2).toString()
-                copper = num.subSequence(numLen - 2, numLen).toString()
+                price.gold = num.subSequence(0, numLen - 4).toString()
+                price.silver = num.subSequence(numLen - 4, numLen - 2).toString()
+                price.copper = num.subSequence(numLen - 2, numLen).toString()
             }
             numLen > 3 -> {
-                gold = "0"
-                silver = num.subSequence(0, numLen - 2).toString()
-                copper = num.subSequence(numLen - 2, numLen).toString()
+                price.silver = num.subSequence(0, numLen - 2).toString()
+                price.copper = num.subSequence(numLen - 2, numLen).toString()
             }
             numLen > 2 -> {
-                gold = "0"
-                silver = num[0].toString()
-                copper = num.subSequence(numLen - 2, numLen).toString()
+                price.silver = num[0].toString()
+                price.copper = num.subSequence(numLen - 2, numLen).toString()
             }
             numLen > 1 -> {
-                gold = "0"
-                silver = "0"
-                copper = num.subSequence(numLen - 2, numLen).toString()
+                price.copper = num.subSequence(numLen - 2, numLen).toString()
             }
             numLen > 0 -> {
-                gold = "0"
-                silver = "0"
-                copper = num[0].toString()
+                price.copper = num[0].toString()
             }
         }
-        return Triple(gold, silver, copper)
+        return price
     }
 }
