@@ -9,4 +9,5 @@
     <color name="colorPrimaryVariant">#5f9661</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorPrimaryLight">#2A4CAF50</color>
 </resources>

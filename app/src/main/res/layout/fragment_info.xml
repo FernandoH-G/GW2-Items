@@ -5,7 +5,7 @@
     android:id="@+id/infoLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2A4CAF50"
+    android:background="@color/colorPrimaryVariant"
     tools:context=".fragments.InfoFragment">
 
     <com.google.android.material.card.MaterialCardView
