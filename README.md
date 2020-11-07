@@ -1,4 +1,4 @@
-# GW2-Market
+# GW2-Items
 This application will allow the user to make queries on the current selling price of an item in GW2.  
 The queries are case insensitive.
 
