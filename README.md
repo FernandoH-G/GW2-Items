@@ -5,16 +5,19 @@ The queries are case insensitive.
 # Screenshots
 
 ## Home  
-<img src="repo-images/gw2_main_edit.png" width="50%"/>  
+<img src="repo-images/app_home.png" width="50%"/>  
 <br>  
 
-## Search  
-<img src="repo-images/gw2_market_search.png" width="50%"/>  
-<br>  
 
 ## Search Result  
-<img src="repo-images/gw2_market_result.png" width="50%"/>  
+<img src="repo-images/app_item_info.png" width="50%"/>  
+
+## About
+<img src="repo-images/app_about.png" width="50%"/>  
+<br>  
 
 # Future plans
 * Improve visual appeal.
 * Add more historical data on the queried item.
+* Add profiles.
+* Open to suggestions!

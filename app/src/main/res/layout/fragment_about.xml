@@ -92,6 +92,17 @@
         app:layout_constraintTop_toBottomOf="@+id/TXTV_credits_text2" />
 
     <TextView
+        android:id="@+id/TXTV_credits_text4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/credits_text4"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TXTV_credits_text3" />
+
+    <TextView
         android:id="@+id/TXTV_credits_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
