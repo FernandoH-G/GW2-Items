@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.android.gw2market"
+        applicationId "com.fhg.gw2market"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 4

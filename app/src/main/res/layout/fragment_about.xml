@@ -5,7 +5,7 @@
     android:id="@+id/aboutLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AboutFragment">
+    tools:context="com.fhg.gw2market.fragments.AboutFragment">
 
     <ImageView
         android:id="@+id/IMGV_about_ic"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryVariant"
-    tools:context=".fragments.InfoFragment">
+    tools:context="com.fhg.gw2market.fragments.InfoFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/MCV_card1"
