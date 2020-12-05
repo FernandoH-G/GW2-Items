@@ -23,11 +23,7 @@
         android:id="@+id/infoFragment"
         android:name="com.fhg.gw2market.fragments.InfoFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info" >
-        <argument
-            android:name="item_id"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_info" />
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.fhg.gw2market.fragments.AboutFragment"

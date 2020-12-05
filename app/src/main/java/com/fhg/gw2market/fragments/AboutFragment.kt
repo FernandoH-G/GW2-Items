@@ -17,7 +17,7 @@ class AboutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        tmpBinding = FragmentAboutBinding.inflate(inflater,container,false)
+        tmpBinding = FragmentAboutBinding.inflate(inflater, container, false)
         return aBinding.root
     }
 

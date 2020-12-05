@@ -12,8 +12,8 @@ android {
         applicationId "com.fhg.gw2market"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 5
-        versionName "1.1.0"
+        versionCode 6
+        versionName "1.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -64,6 +64,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.archLifecycleVersion"
 
     // Kotlin components
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

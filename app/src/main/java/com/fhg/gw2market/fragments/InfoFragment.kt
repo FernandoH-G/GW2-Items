@@ -3,13 +3,13 @@ package com.fhg.gw2market.fragments
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.navArgs
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.fhg.gw2market.databinding.FragmentInfoBinding
-import com.fhg.gw2market.fragments.InfoFragmentArgs
+import com.fhg.gw2market.room.MarketViewModel
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -20,12 +20,16 @@ import com.squareup.picasso.Picasso
 import org.json.JSONArray
 import org.json.JSONObject
 
-class Price(var gold: String = "0", var silver: String = "0", var copper: String = "0")
+class Price(
+    var gold: String = "0",
+    var silver: String = "0",
+    var copper: String = "0"
+)
 
 class InfoFragment : Fragment() {
     private var tmpBinding: FragmentInfoBinding? = null
     private val iBinding get() = tmpBinding!!
-
+    private val mViewModel: MarketViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +50,13 @@ class InfoFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val queue = Volley.newRequestQueue(requireContext())
-        val itemIDArg: InfoFragmentArgs by navArgs()
-        val itemID = itemIDArg.itemId
-        val tpURL = "http://api.gw2tp.com/1/items?ids=${itemID}&fields=name,sell,buy,img"
-        val infoURL = "https://api.guildwars2.com/v2/items?ids=${itemID}&lang=en"
+        // QUESTION: Should mItemID be observed instead of .value?
+        val tpURL =
+            "http://api.gw2tp.com/1/items?ids=${mViewModel.mItemID.value}&fields=name,sell,buy,img"
+        val infoURL =
+            "https://api.guildwars2.com/v2/items?ids=${mViewModel.mItemID.value}&lang=en"
+        Log.d("InfoFrag", tpURL)
+
 
         val jsonRequestTP = JsonObjectRequest(Request.Method.GET, tpURL, null,
             Response.Listener { resp ->
@@ -78,16 +85,18 @@ class InfoFragment : Fragment() {
                     .into(iBinding.IMGVIcon)
             }, { Log.i("InfoFrag", "Error in jsonRequestTP") })
 
-        val jsonRequestInfo = JsonArrayRequest(Request.Method.GET, infoURL, null,
-            { resp ->
-                val respObj = resp.getJSONObject(0)
-                iBinding.MTXTVType.text = parseItemInfo(respObj, "type")
-                iBinding.MTXTVLevel.text = parseItemInfo(respObj, "level")
-                iBinding.MTXTVDescription.text = parseItemInfo(respObj, "description")
-                iBinding.MTXTVRarity.text = parseItemInfo(respObj, "rarity")
+        val jsonRequestInfo =
+            JsonArrayRequest(Request.Method.GET, infoURL, null,
+                { resp ->
+                    val respObj = resp.getJSONObject(0)
+                    iBinding.MTXTVType.text = parseItemInfo(respObj, "type")
+                    iBinding.MTXTVLevel.text = parseItemInfo(respObj, "level")
+                    iBinding.MTXTVDescription.text =
+                        parseItemInfo(respObj, "description")
+                    iBinding.MTXTVRarity.text = parseItemInfo(respObj, "rarity")
 //                Log.i("InfoFrag", resp.getJSONObject(0).get("level").toString())
 
-            }, { Log.i("InfoFrag", "Error in new json request.") })
+                }, { Log.i("InfoFrag", "Error in new json request.") })
 
         queue.add(jsonRequestTP)
         queue.add(jsonRequestInfo)
@@ -101,7 +110,8 @@ class InfoFragment : Fragment() {
     // 1: item name, 2: selling price, 3: buying price, 4: img url.
     private fun parseItemInfo(obj: JSONArray, infoIndex: Int): String {
         val errorReason = arrayOf("Item Name", "Selling Price", "IMG URL")
-        return obj.getJSONArray(0)?.get(infoIndex)?.toString() ?: errorReason[infoIndex]
+        return obj.getJSONArray(0)?.get(infoIndex)?.toString()
+            ?: errorReason[infoIndex]
     }
 
     // Things to get from obj: description, type, level, rarity
@@ -128,7 +138,8 @@ class InfoFragment : Fragment() {
         when {
             numLen > 4 -> {
                 price.gold = num.subSequence(0, numLen - 4).toString()
-                price.silver = num.subSequence(numLen - 4, numLen - 2).toString()
+                price.silver =
+                    num.subSequence(numLen - 4, numLen - 2).toString()
                 price.copper = num.subSequence(numLen - 2, numLen).toString()
             }
             numLen > 3 -> {

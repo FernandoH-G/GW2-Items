@@ -1,37 +1,30 @@
 package com.fhg.gw2market.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.fhg.gw2market.databinding.FragmentMainBinding
-import com.fhg.gw2market.fragments.MainFragmentDirections
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import com.fhg.gw2market.room.MarketViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.io.IOException
-import java.util.*
 
 class MainFragment : Fragment() {
     private var tmpBinding: FragmentMainBinding? = null
     private val mBinding get() = tmpBinding!!
-    private val eMap = mutableMapOf<String,Int>()
+    private val mViewModel: MarketViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadEquipmentMap()
-        Log.i("mainFrag", "onCreate: loaded Equipment Map.")
+        // POI
+        mViewModel.loadEquipmentMap()
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         tmpBinding = FragmentMainBinding.inflate(inflater, container, false)
@@ -43,6 +36,7 @@ class MainFragment : Fragment() {
 
         mBinding.BTNSearch.setOnClickListener {
             if (isInputNull) {
+                // TODO: Hide the virtual keyboard so user sees message.
                 val msg = "Please input full item name."
                 val snackbar = Snackbar.make(
                     mBinding.BTNSearch, msg,
@@ -52,30 +46,21 @@ class MainFragment : Fragment() {
                 return@setOnClickListener
             }
             val itemName = mBinding.TXTIItemId.text.toString()
-            // Use map to figure out whether string id is in map.
-            val itemID = eMap[itemName.toUpperCase(Locale.ROOT)].toString()
-            Log.i("mainFrag","Item ID: $itemID")
-            if (itemID.contentEquals("null")) {
+            if (!mViewModel.isItemNameFound(itemName)) {
                 val msg = "Please check for misspellings."
                 val snackbar = Snackbar.make(
-                    mBinding.BTNSearch,msg,
+                    mBinding.BTNSearch, msg,
                     Snackbar.LENGTH_SHORT
                 )
                 snackbar.show()
                 return@setOnClickListener
             } else {
                 mBinding.TXTIItemId.text?.clear()
-                val toInfo =
-                    MainFragmentDirections.actionMainFragmentToInfoFragment(
-                        itemID
-                    )
-                Navigation.findNavController(mBinding.root).navigate(toInfo)
+                navigateToInfo()
             }
         }
         mBinding.TXTVAboutLink.setOnClickListener {
-            val toAbout =
-                MainFragmentDirections.actionMainFragmentToAboutFragment()
-            Navigation.findNavController(mBinding.root).navigate(toAbout)
+            navigateToAbout()
         }
     }
 
@@ -87,23 +72,16 @@ class MainFragment : Fragment() {
     private val isInputNull: Boolean
         get() = mBinding.TXTIItemId.text.toString().isEmpty()
 
+    private fun navigateToInfo() {
+        val toInfo = MainFragmentDirections
+            .actionMainFragmentToInfoFragment()
+        Navigation.findNavController(mBinding.root).navigate(toInfo)
+    }
 
-    private fun loadEquipmentMap() {
-        val queue = Volley.newRequestQueue(requireContext())
-        val tpURL= "http://api.gw2tp.com/1/bulk/items-names.json"
-
-        val jsonRequestTP = JsonObjectRequest(Request.Method.GET, tpURL, null,
-            { resp ->
-                var name : String
-                var id : Int
-                val respObjArr = resp.getJSONArray("items")
-                for (i in 0 until respObjArr.length()) {
-                    id = respObjArr.getJSONArray(i).get(0) as Int
-                    name = respObjArr.getJSONArray(i).get(1).toString()
-                    eMap[name.toUpperCase(Locale.ROOT)] = id
-                }
-
-            }, {Log.d("mainFrag","Error in gw2json request.")})
-        queue.add(jsonRequestTP)
+    private fun navigateToAbout() {
+        val toAbout =
+            MainFragmentDirections.actionMainFragmentToAboutFragment()
+        Navigation.findNavController(mBinding.root).navigate(toAbout)
     }
 }
+
