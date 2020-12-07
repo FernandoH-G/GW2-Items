@@ -1,37 +1,85 @@
 package com.fhg.gw2market.room
 
-import android.content.Context
-import android.util.Log
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import java.util.*
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
+import retrofit2.http.Url
+
+data class GW2TPItemNames(
+    val items: List<List<Any>>
+)
+
+data class GW2TPItem(
+    val results: List<List<Any>>
+)
+
+data class GW2InfoItem(
+    val description: String?,
+    val type: String,
+    val rarity: String,
+    val level: Int
+)
+
+interface GW2TPItemNameService {
+    @GET("/1/bulk/items-names.json")
+    suspend fun getTPItemNames(
+    ): GW2TPItemNames
+}
+
+interface GW2TPService {
+    @GET("/1/items")
+    suspend fun getTPItem(
+        @Query("ids") id: Int,
+        @Query("fields") fields: String
+    ): GW2TPItem
+}
+
+interface GW2InfoService {
+    @GET
+    suspend fun getInfoItem(
+        @Url url: String,
+        @Query("ids") id: Int
+    ): List<GW2InfoItem>
+}
+
+object RetrofitInstance {
+    const val BASE_URL = "http://api.gw2tp.com/"
+
+    private val retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    val tpAPI: GW2TPService by lazy {
+        retrofit.create(GW2TPService::class.java)
+    }
+
+    val itemNameAPI: GW2TPItemNameService by lazy {
+        retrofit.create(GW2TPItemNameService::class.java)
+    }
+    val infoAPI: GW2InfoService by lazy {
+        retrofit.create(GW2InfoService::class.java)
+    }
+}
 
 // The repo handles whether to fetch data from a network, cache, or the database.
 class ItemRepository(
-    private val itemDao: ItemDao,
-    private val context: Context
+    private val itemDao: ItemDao
 ) {
-    fun loadEquipmentMap(): MutableMap<String, Int> {
-        // withContext was not needed.
-        val eMap = mutableMapOf<String, Int>()
-        val queue = Volley.newRequestQueue(context)
-        val tpURL = "http://api.gw2tp.com/1/bulk/items-names.json"
 
-        val jsonRequestTP =
-            JsonObjectRequest(Request.Method.GET, tpURL, null,
-                { resp ->
-                    var name: String
-                    var id: Int
-                    val respObjArr = resp.getJSONArray("items")
-                    for (i in 0 until respObjArr.length()) {
-                        id = respObjArr.getJSONArray(i).get(0) as Int
-                        name = respObjArr.getJSONArray(i).get(1).toString()
-                        eMap[name.toUpperCase(Locale.ROOT)] = id
-                    }
-                }, { Log.d("itemRepo", "Error in gw2json request.") })
-        queue.add(jsonRequestTP)
-        return eMap
+    suspend fun getTPItem(id: Int, fields: String): GW2TPItem {
+        return RetrofitInstance.tpAPI.getTPItem(id, fields)
+    }
+
+    suspend fun getInfoItem(url: String, id: Int): List<GW2InfoItem> {
+        return RetrofitInstance.infoAPI.getInfoItem(url, id)
+    }
+
+    suspend fun loadEquipmentMap(): GW2TPItemNames {
+        return RetrofitInstance.itemNameAPI.getTPItemNames()
     }
 
 //    val allItemsRepo: LiveData<List<Item>> = itemDao.getAllItems()
