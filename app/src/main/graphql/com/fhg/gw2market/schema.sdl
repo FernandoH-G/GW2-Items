@@ -1,0 +1,27 @@
+type Query {
+    getItemByID(id: String!): Item!
+    getItemNames: [ItemNamePair!]!
+}
+
+type ItemNamePair {
+    id: ID!
+    name: String!
+}
+
+type Price {
+    gold: String!
+    silver: String!
+    copper: String!
+}
+
+type Item {
+    id: ID!
+    name: String!
+    imgURL: String!
+    sell: Price!
+    buy: Price!
+    description: String
+    type: String!
+    rarity: String!
+    level: String!
+}

@@ -1,0 +1,28 @@
+query GetItemByID($id: String!){
+    getItemByID(id: $id) {
+        id
+        name
+        imgURL
+        sell {
+            gold
+            silver
+            copper
+        }
+        buy {
+            gold
+            silver
+            copper
+        }
+        description
+        type
+        rarity
+        level
+    }
+}
+
+query GetItemNames {
+    getItemNames {
+        id
+        name
+    }
+}

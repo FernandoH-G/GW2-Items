@@ -21,11 +21,7 @@ class InfoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel.itemID.observe(this, { itemID ->
-            mViewModel.getTPItem(itemID, "name,sell,buy,img")
-            mViewModel.getInfoItem(
-                "https://api.guildwars2.com/v2/items",
-                itemID
-            )
+            mViewModel.getItem(itemID)
         })
     }
 
@@ -42,25 +38,23 @@ class InfoFragment : Fragment() {
         iBinding.FABBackButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        mViewModel.tpItem.observe(viewLifecycleOwner, { tpItem ->
-            Log.i("infofrag", tpItem.toString())
+        mViewModel.item.observe(viewLifecycleOwner, { item ->
+            Log.i("infofrag", item.toString())
             iBinding.MTXTVName.setTypeface(null, Typeface.BOLD)
-            iBinding.MTXTVName.text = tpItem.name
-            Picasso.get().load(tpItem.imgURL).into(iBinding.IMGVIcon)
+            iBinding.MTXTVName.text = item.name
+            Picasso.get().load(item.imgURL).into(iBinding.IMGVIcon)
             // Sell Price
-            iBinding.MTXTVSellingPriceGold.text = tpItem.sell.gold
-            iBinding.MTXTVSellingPriceSilver.text = tpItem.sell.silver
-            iBinding.MTXTVSellingPriceCopper.text = tpItem.sell.copper
+            iBinding.MTXTVSellingPriceGold.text = item.sell.gold
+            iBinding.MTXTVSellingPriceSilver.text = item.sell.silver
+            iBinding.MTXTVSellingPriceCopper.text = item.sell.copper
             // Buy Price
-            iBinding.MTXTVBuyingPriceGold.text = tpItem.buy.gold
-            iBinding.MTXTVBuyingPriceSilver.text = tpItem.buy.silver
-            iBinding.MTXTVBuyingPriceCopper.text = tpItem.buy.copper
-        })
-        mViewModel.infoItem.observe(viewLifecycleOwner, { infoItem ->
-            iBinding.MTXTVType.text = infoItem.type
-            iBinding.MTXTVLevel.text = infoItem.level
-            iBinding.MTXTVRarity.text = infoItem.rarity
-            iBinding.MTXTVDescription.text = infoItem.description
+            iBinding.MTXTVBuyingPriceGold.text = item.buy.gold
+            iBinding.MTXTVBuyingPriceSilver.text = item.buy.silver
+            iBinding.MTXTVBuyingPriceCopper.text = item.buy.copper
+            iBinding.MTXTVType.text = item.type
+            iBinding.MTXTVLevel.text = item.level
+            iBinding.MTXTVRarity.text = item.rarity
+            iBinding.MTXTVDescription.text = item.description
         })
     }
 
