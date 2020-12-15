@@ -48,7 +48,7 @@ class MarketViewModel(application: Application) :
                 imgURL = itemResp.imgURL,
                 sell = itemResp.sell,
                 buy = itemResp.buy,
-                description = itemResp.description ?: "No Description",
+                description = itemResp.description,
                 type = itemResp.type,
                 rarity = itemResp.rarity,
                 level = itemResp.level
