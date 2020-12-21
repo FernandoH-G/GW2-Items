@@ -33,7 +33,6 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
         mBinding.BTNSearch.setOnClickListener {
             if (isInputNull) {
                 // TODO: Hide the virtual keyboard so user sees message.

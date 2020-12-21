@@ -1,8 +1,10 @@
 package com.fhg.gw2market.room
 
+import android.util.Log
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
+import com.apollographql.apollo.exception.ApolloException
 import com.fhg.gw2market.GetItemByIDQuery
 import com.fhg.gw2market.GetItemNamesQuery
 
@@ -27,13 +29,19 @@ object ApolloClientNetwork {
     }
 }
 
+// Look at Dagger for dependency injections.
 // The repo handles whether to fetch data from a network, cache, or the database.
 class ItemRepository(
     private val itemDao: ItemDao
 ) {
-    suspend fun loadEquipmentMap(): Response<GetItemNamesQuery.Data>{
-        val inQuery = GetItemNamesQuery()
-        return ApolloClientNetwork.apolloClient.query(inQuery).await()
+    suspend fun loadEquipmentMap(): Response<GetItemNamesQuery.Data>? {
+        return try {
+            val inQuery = GetItemNamesQuery()
+            ApolloClientNetwork.apolloClient.query(inQuery).await()
+        } catch (e: ApolloException) {
+            Log.d("repo", "loadEquipmentMap() error: $e")
+            null
+        }
     }
 
     suspend fun getItem(id: String): Response<GetItemByIDQuery.Data> {

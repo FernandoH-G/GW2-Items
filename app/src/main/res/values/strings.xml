@@ -33,4 +33,5 @@
     <string name="item_level">Level</string>
     <string name="rarity_header"><u>Rarity</u></string>
     <string name="vendor_value_header"><u>Vendor Value</u></string>
+    <string name="server_error">Unable to reach server. Try again later.</string>
 </resources>

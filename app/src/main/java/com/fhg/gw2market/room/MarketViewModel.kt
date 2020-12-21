@@ -17,9 +17,6 @@ class MarketViewModel(application: Application) :
         val itemsDao = ItemRoomDatabase.getDatabase(application, viewModelScope)
             .itemDao()
         mRepository = ItemRepository(itemsDao)
-        // QUESTION: Why does calling loadEquipmentMap() from init block
-        //  not prepare the eMap to be used in time?
-        // eMap = repository.loadEquipmentMap()
 
         // Uncommenting will fix the uninitialized allItemsVM declaration.
         // allItemsVM = repository.allItemsRepo
@@ -35,8 +32,10 @@ class MarketViewModel(application: Application) :
     }
     val item: LiveData<GW2Item> get() = _item
 
-    // Have mEMap be a liveData<> { } ?
-    private val mEMap = mutableMapOf<String, String>()
+    private val _eMap: MutableLiveData<MutableMap<String, String>> by lazy {
+        MutableLiveData()
+    }
+    val eMap: LiveData<MutableMap<String, String>> get() = _eMap
 
     fun getItem(id: String) {
         viewModelScope.launch {
@@ -59,22 +58,29 @@ class MarketViewModel(application: Application) :
     fun loadEquipmentMap() {
         viewModelScope.launch {
             val itemNameIds =
-                mRepository.loadEquipmentMap().data?.getItemNames
+                mRepository.loadEquipmentMap()?.data?.getItemNames
                     ?: return@launch
+
+            Log.d("MVM", "loading eMap")
             var id: String
             var name: String
+            val tmpMap = mutableMapOf<String,String>()
 
             itemNameIds.forEach {
                 id = it.id
                 name = it.name
-                mEMap[name.toUpperCase(Locale.ROOT)] = id
+                tmpMap[name.toUpperCase(Locale.ROOT)] = id
             }
+            _eMap.value = tmpMap
+            Log.d("MVM", "Done loading eMap")
         }
+        Log.d("MVM", "After launch loadEquipmentMap()")
     }
 
     fun isItemNameFound(itemName: String): Boolean {
         // Use map to figure out whether string id is in map.
-        val itemID = mEMap[itemName.toUpperCase(Locale.ROOT)] ?: "null"
+        val itemID =
+            eMap.value?.get(itemName.toUpperCase(Locale.ROOT)) ?: "null"
         Log.i("MVM", "Item Name: $itemName - Item ID: $itemID")
         if (itemID.contentEquals("null")) {
             return false

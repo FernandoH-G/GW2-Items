@@ -18,13 +18,6 @@ class InfoFragment : Fragment() {
     private val iBinding get() = tmpBinding!!
     private val mViewModel: MarketViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mViewModel.itemID.observe(this, { itemID ->
-            mViewModel.getItem(itemID)
-        })
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +31,9 @@ class InfoFragment : Fragment() {
         iBinding.FABBackButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
+        mViewModel.itemID.observe(viewLifecycleOwner, { itemID ->
+            mViewModel.getItem(itemID)
+        })
         mViewModel.item.observe(viewLifecycleOwner, { item ->
             Log.i("infofrag", item.toString())
             iBinding.MTXTVName.setTypeface(null, Typeface.BOLD)
