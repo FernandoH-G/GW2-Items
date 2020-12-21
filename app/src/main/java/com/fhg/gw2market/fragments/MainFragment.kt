@@ -18,8 +18,8 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // POI
-        mViewModel.loadEquipmentMap()
+        // Initiates viewModel as soon as application starts!
+        mViewModel.eMap.observe(this,{})
     }
 
     override fun onCreateView(

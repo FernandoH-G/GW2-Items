@@ -31,19 +31,14 @@ class InfoFragment : Fragment() {
         iBinding.FABBackButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        mViewModel.itemID.observe(viewLifecycleOwner, { itemID ->
-            mViewModel.getItem(itemID)
-        })
         mViewModel.item.observe(viewLifecycleOwner, { item ->
             Log.i("infofrag", item.toString())
             iBinding.MTXTVName.setTypeface(null, Typeface.BOLD)
             iBinding.MTXTVName.text = item.name
             Picasso.get().load(item.imgURL).into(iBinding.IMGVIcon)
-            // Sell Price
             iBinding.MTXTVSellingPriceGold.text = item.sell.gold
             iBinding.MTXTVSellingPriceSilver.text = item.sell.silver
             iBinding.MTXTVSellingPriceCopper.text = item.sell.copper
-            // Buy Price
             iBinding.MTXTVBuyingPriceGold.text = item.buy.gold
             iBinding.MTXTVBuyingPriceSilver.text = item.buy.silver
             iBinding.MTXTVBuyingPriceCopper.text = item.buy.copper

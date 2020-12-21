@@ -3,7 +3,6 @@ package com.fhg.gw2market.room
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
-import kotlinx.coroutines.launch
 import java.util.*
 
 // Refer to Room with a view to remove passing in an application
@@ -22,70 +21,43 @@ class MarketViewModel(application: Application) :
         // allItemsVM = repository.allItemsRepo
     }
 
-    private val _itemID: MutableLiveData<String> by lazy {
-        MutableLiveData()
-    }
-    val itemID: LiveData<String> get() = _itemID
+    val eMap = liveData {
+        val nameIDList =
+            mRepository.loadEquipmentMap()?.data?.getItemNames
+                ?: return@liveData
+        var id: String
+        var name: String
+        val eMap = mutableMapOf<String, String>()
 
-    private val _item: MutableLiveData<GW2Item> by lazy {
-        MutableLiveData()
-    }
-    val item: LiveData<GW2Item> get() = _item
-
-    private val _eMap: MutableLiveData<MutableMap<String, String>> by lazy {
-        MutableLiveData()
-    }
-    val eMap: LiveData<MutableMap<String, String>> get() = _eMap
-
-    fun getItem(id: String) {
-        viewModelScope.launch {
-            val itemResp =
-                mRepository.getItem(id).data?.getItemByID ?: return@launch
-            _item.value = GW2Item(
-                id = itemResp.id,
-                name = itemResp.name,
-                imgURL = itemResp.imgURL,
-                sell = itemResp.sell,
-                buy = itemResp.buy,
-                description = itemResp.description,
-                type = itemResp.type,
-                rarity = itemResp.rarity,
-                level = itemResp.level
-            )
+        nameIDList.forEach {
+            id = it.id
+            name = it.name
+            eMap[name.toUpperCase(Locale.ROOT)] = id
         }
+        emit(eMap)
     }
 
-    fun loadEquipmentMap() {
-        viewModelScope.launch {
-            val itemNameIds =
-                mRepository.loadEquipmentMap()?.data?.getItemNames
-                    ?: return@launch
-
-            Log.d("MVM", "loading eMap")
-            var id: String
-            var name: String
-            val tmpMap = mutableMapOf<String,String>()
-
-            itemNameIds.forEach {
-                id = it.id
-                name = it.name
-                tmpMap[name.toUpperCase(Locale.ROOT)] = id
-            }
-            _eMap.value = tmpMap
-            Log.d("MVM", "Done loading eMap")
+    private val mItemID: MutableLiveData<String> by lazy {
+        MutableLiveData()
+    }
+    val item = mItemID.switchMap { itemID ->
+        liveData {
+            val item =
+                mRepository.getItem(itemID).data?.getItemByID ?: return@liveData
+            emit(item)
         }
-        Log.d("MVM", "After launch loadEquipmentMap()")
     }
 
     fun isItemNameFound(itemName: String): Boolean {
         // Use map to figure out whether string id is in map.
         val itemID =
-            eMap.value?.get(itemName.toUpperCase(Locale.ROOT)) ?: "null"
+            eMap.value?.get(itemName.toUpperCase(Locale.ROOT))
+                ?: return false
         Log.i("MVM", "Item Name: $itemName - Item ID: $itemID")
         if (itemID.contentEquals("null")) {
             return false
         }
-        _itemID.value = itemID
+        mItemID.value = itemID
         return true
     }
 
